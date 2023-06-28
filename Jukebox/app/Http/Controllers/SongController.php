@@ -55,15 +55,18 @@ class SongController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(song $song)
+    public function show($id)
     {
-        //
+        
+        $song = Song::findOrFail($id);
+        //dd($song);
+        return view('song.show', ['song' => $song]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(song $song)
+    public function edit(Song $song)
     {
         //
     }
@@ -71,7 +74,7 @@ class SongController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, song $song)
+    public function update(Request $request, Song $song)
     {
         //
     }
@@ -79,7 +82,7 @@ class SongController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(song $song)
+    public function destroy(Song $song)
     {
         Song::destroy($song->id);
         return redirect(route('song.index'));

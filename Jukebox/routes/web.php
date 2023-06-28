@@ -42,7 +42,7 @@ Route::get('/song/all', [SongController::class, 'index'])->name('song.index');
 Route::get('/song/create', [SongController::class, 'create'])->name('song.create');
 Route::post('/song/store', [SongController::class, 'store'])->name('song.store');
 Route::get('/song/destroy/{song}', [SongController::class, 'destroy'])->name('song.destroy');
-Route::get('/songs/{id}', [SongController::class, 'show'])->name('songs.show');
+Route::get('/song/{id}', [SongController::class, 'show'])->name('song.show');
 
 Route::get('/playlist/all', [PlaylistController::class, 'index'])->name('playlist.index')->middleware('auth');
 Route::get('/playlist/create', [PlaylistController::class, 'create'])->name('playlist.create')->middleware('auth');

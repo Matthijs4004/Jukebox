@@ -7,7 +7,7 @@
 <ul>
 @foreach ($songs as $song)
     <li>
-        {{$song->name}} - {{$song->author}} | Releasedate:  {{$song->releasedate}} | Duration: {{$song->duration}} | is found in playlist: 
+        <a href="{{ route('song.show', ['id' => $song->id]) }}">{{$song->name}}</a> - {{$song->author}} | Releasedate:  {{$song->releasedate}} | Duration: {{$song->duration}} | is found in playlist: 
         @foreach($song->playlists as $playlist) 
             {{$playlist->name}}; 
         @endforeach
