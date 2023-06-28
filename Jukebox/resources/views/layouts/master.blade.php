@@ -9,10 +9,7 @@
 </head>
 <body>
     <nav>
-        <!-- Other navbar content -->
-    
         <ul style="display:flex;list-style: none;gap: 10px;">
-            <!-- Other navbar links -->
             <li><a href="{{route('genre.index')}}">Genres</a></li>
             <li><a href="{{route('song.index')}}">Songs</a></li>
             <li><a href="{{route('playlist.index')}}">Playlists</a></li>
@@ -21,6 +18,12 @@
             @else
                 <li>
                     |  <a href="{{ route('dashboard') }}">Welcome, {{ Auth::user()->name }}</a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             @endguest
         </ul>
