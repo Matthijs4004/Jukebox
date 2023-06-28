@@ -29,8 +29,12 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
+        $request ->validate([
+            'name' => 'required',
+        ]);
+
         Genre::create([
-            "name" => $request['genreName']
+            "name" => $request['name']
         ]);
         return redirect(route('genre.index'));
     }

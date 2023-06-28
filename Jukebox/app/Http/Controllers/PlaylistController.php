@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\playlist;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 
 class PlaylistController extends Controller
@@ -29,6 +29,10 @@ class PlaylistController extends Controller
      */
     public function store(Request $request)
     {
+        $request ->validate([
+            'name' => 'required',
+        ]);
+
         playlist::create([
             "name" => $request['playlistName']
         ]);
