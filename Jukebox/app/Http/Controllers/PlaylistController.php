@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
@@ -12,8 +13,14 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $playlists = playlist::all();
-        return view('playlist.index', ['playlists' => $playlists]);
+        if (Auth::check()) {
+            $user = Auth::user(); // Retrieve the authenticated user
+            $playlists = $user->playlists;
+            return view('playlist.index', ['playlists' => $playlists]);
+        }
+        
+        $loginMessage = 'You need to be logged in to view your playlists.';
+        return view('playlist.index', compact($loginMessage));
     }
 
     /**
@@ -29,13 +36,20 @@ class PlaylistController extends Controller
      */
     public function store(Request $request)
     {
-        $request ->validate([
+        $user = Auth::user();
+
+        $validatedData = $request ->validate([
             'name' => 'required',
         ]);
 
-        playlist::create([
-            "name" => $request['playlistName']
+        /*playlist::create([
+            "name" => $request['name']
         ]);
+        */
+        $playlist = new Playlist($validatedData);
+        $playlist->user_id = $user->id;
+        $playlist->save();
+        //$playlist = $user->playlists()->create($validatedData);
         return redirect(route('playlist.index'));
     }
 

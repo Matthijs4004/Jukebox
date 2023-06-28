@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Genre;
-use App\Models\song;
+use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class SongController extends Controller
      */
     public function index()
     {
-        dd(Auth::user());
+        //dd(Auth::user());
         $songs = Song::all();
         return view('song.index', ['songs' => $songs]);
     }

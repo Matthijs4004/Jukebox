@@ -13,4 +13,8 @@ class Playlist extends Model
     public function songs(){
         return $this->belongsToMany(song::class);
     }
+    public function user()  {
+        return $this->belongsTo(User::class);
+    }
+
 }
