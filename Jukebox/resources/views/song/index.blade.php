@@ -7,10 +7,7 @@
 <ul>
 @foreach ($songs as $song)
     <li>
-        <a href="{{ route('song.show', ['id' => $song->id]) }}">{{$song->name}}</a> - {{$song->author}} | Releasedate:  {{$song->releasedate}} | Duration: {{$song->duration}} | is found in playlist: 
-        @foreach($song->playlists as $playlist) 
-            {{$playlist->name}}; 
-        @endforeach
+        <a href="{{ route('song.show', ['id' => $song->id]) }}">{{$song->name}}</a> - {{$song->author}} 
             | <a href="{{'/song/destroy/' .  $song->id}}">Delete</a>
         </li>
 @endforeach

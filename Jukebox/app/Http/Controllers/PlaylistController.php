@@ -52,7 +52,6 @@ class PlaylistController extends Controller
     public function show($id)
     {
         $playlist = Playlist::findOrFail($id);
-        //dd($id);
         return view('playlist.show', ['playlist' => $playlist]);
     }
 
@@ -79,7 +78,7 @@ class PlaylistController extends Controller
         // Perform other updates as needed
         $playlist->save();
 
-        return redirect()->route('playlist.show', $playlist->id)
+        return redirect()->route('playlist.edit', $playlist->id)
             ->with('success', 'Playlist updated successfully.');
     }
 
@@ -101,14 +100,14 @@ class PlaylistController extends Controller
         $song = $request->input('song');
         $playlist->songs()->attach($song);
 
-        return redirect(route('playlist.index'));
+        return redirect(route('playlist.edit', ['playlist' => $playlist]));
     }
 
     public function removeSong($playlistId, $songId) {
         $playlist = Playlist::findOrFail($playlistId);
         $playlist->songs()->detach($songId);
 
-        return redirect(route('playlist.index'));
+        return redirect(route('playlist.show', ['playlist' => $playlist]));
     }
 
 }

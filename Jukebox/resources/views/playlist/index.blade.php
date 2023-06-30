@@ -15,9 +15,7 @@
     @if ($playlist->songs->count() > 0)
         <ul>
             @foreach ($playlist->songs as $song)
-                <li>{{ $song->name }} |
-                    <a href="{{ route('playlist.removeSong', ['playlist' => $playlist->id, 'song' => $song->id]) }}">Remove</a>
-                </li>
+                <li>{{ $song->name }}</li>
             @endforeach
         </ul>
     @else
