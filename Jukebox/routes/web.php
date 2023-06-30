@@ -47,7 +47,11 @@ Route::get('/song/{id}', [SongController::class, 'show'])->name('song.show');
 Route::get('/playlist/all', [PlaylistController::class, 'index'])->name('playlist.index')->middleware('auth');
 Route::get('/playlist/create', [PlaylistController::class, 'create'])->name('playlist.create')->middleware('auth');
 Route::post('/playlist/store', [PlaylistController::class, 'store'])->name('playlist.store')->middleware('auth');
-Route::get('/playlist/destroy/{playlist}', [PlaylistController::class, 'destroy'])->name('playlist.destroy')->middleware('auth');
+Route::get('/playlist/{playlist}/destroy', [PlaylistController::class, 'destroy'])->name('playlist.destroy')->middleware('auth');
+
+Route::get('/playlist/{playlist}', [PlaylistController::class, 'show'])->name('playlist.show');
+Route::get('/playlist/{playlist}/edit', [PlaylistController::class, 'edit'])->name('playlist.edit');
+Route::post('/playlist/{playlist}/update', [PlaylistController::class, 'update'])->name('playlist.update');
 
 Route::post('/playlist/addSongs', [PlaylistController::class, 'addSongs'])->name('playlist.addSongs');
 Route::get('/playlist/{playlist}/song/{song}/remove', [PlaylistController::class, 'removeSong'])->name('playlist.removeSong');

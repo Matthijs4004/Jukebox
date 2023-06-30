@@ -7,6 +7,9 @@
 <ul>
 @foreach ($playlists as $playlist)
     <li>{{$playlist->name}} |
+        <?php //dd($playlist->id); ?>
+        <a href="{{ route('playlist.show', $playlist->id) }}">Manage</a>
+        |
         <a href="{{ route('playlist.destroy', $playlist->id) }}">Delete</a>
     </li>
     @if ($playlist->songs->count() > 0)
@@ -22,26 +25,5 @@
     @endif
 @endforeach
 </ul> 
-<a href="{{route('playlist.create')}}">Create a playlist</a>
-
-<form action="{{ route('playlist.addSongs') }}" method="POST">
-    @csrf
-
-    <label for="playlist">Select Playlist:</label>
-    <select name="playlist" id="playlist">
-        @foreach($playlists as $playlist)
-            <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
-        @endforeach
-    </select>
-
-    <label for="songs">Select Songs:</label>
-    <select name="songs[]" id="songs" multiple>
-        @foreach($songs as $song)
-            <option value="{{ $song->id }}">{{ $song->name }}</option>
-        @endforeach
-    </select>
-
-    <button type="submit">Add Songs</button>
-</form>
-
+<a href="{{route('playlist.create')}}">Create a playlist</a><br>
 @endsection

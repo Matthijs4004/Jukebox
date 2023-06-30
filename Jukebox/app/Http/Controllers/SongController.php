@@ -57,9 +57,7 @@ class SongController extends Controller
      */
     public function show($id)
     {
-        
         $song = Song::findOrFail($id);
-        //dd($song);
         return view('song.show', ['song' => $song]);
     }
 

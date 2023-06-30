@@ -49,9 +49,11 @@ class PlaylistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Playlist $playlist)
+    public function show($id)
     {
-        //
+        $playlist = Playlist::findOrFail($id);
+        //dd($id);
+        return view('playlist.show', ['playlist' => $playlist]);
     }
 
     /**
@@ -59,7 +61,11 @@ class PlaylistController extends Controller
      */
     public function edit(Playlist $playlist)
     {
-        //
+        $id = $playlist->id;
+        $playlist = Playlist::findOrFail($id);
+        $songs = Song::all();
+
+        return view('playlist.edit', ['playlist' => $playlist], ['songs' => $songs]);
     }
 
     /**
@@ -67,7 +73,14 @@ class PlaylistController extends Controller
      */
     public function update(Request $request, Playlist $playlist)
     {
-        //
+        $id = $playlist->id;
+        $playlist = Playlist::findOrFail($id);
+        $playlist->name = $request->input('name');
+        // Perform other updates as needed
+        $playlist->save();
+
+        return redirect()->route('playlist.show', $playlist->id)
+            ->with('success', 'Playlist updated successfully.');
     }
 
     /**
@@ -85,8 +98,8 @@ class PlaylistController extends Controller
 
     public function addSongs(Request $request) {
         $playlist = Playlist::find($request->input('playlist'));
-        $songs = $request->input('songs');
-        $playlist->songs()->attach($songs);
+        $song = $request->input('song');
+        $playlist->songs()->attach($song);
 
         return redirect(route('playlist.index'));
     }
