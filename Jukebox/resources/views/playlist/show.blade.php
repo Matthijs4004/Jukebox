@@ -8,6 +8,13 @@
 @if ($playlist->songs->count() == 0)
     <p style="color: red;">Playlist is empty</p>
 @else 
+    <?php 
+        $playlistDuration = 0;
+        foreach ($playlist->songs as $song) {
+            $playlistDuration += $song['duration'];
+        }
+        echo "Playlist duration: " . $playlistDuration . " seconds";
+    ?>
     @foreach ($playlist->songs as $song)
         <li>{{ $song->name }} |
             <a href="{{ route('playlist.removeSong', ['playlist' => $playlist->id, 'song' => $song->id]) }}">Remove</a>
