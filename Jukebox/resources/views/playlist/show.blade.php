@@ -24,4 +24,6 @@
 <a href="{{ route('playlist.edit', $playlist->id) }}">Edit Playlist</a>
 <br>
 <a href="{{ route('playlist.destroy', $playlist->id) }}">Delete</a>
+<br><br>
+<a href="{{route('playlist.index')}}"><- Back</a>
 @endsection

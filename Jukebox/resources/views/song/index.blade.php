@@ -4,24 +4,35 @@
 
 @section('content')
 <h1>Totaaloverzicht Songs</h1>
-<form action="{{ route('song.index') }}" method="GET">
+<form class="form__song-filter" action="{{ route('song.index') }}" method="GET">
     <label for="genre">Select Genre:</label>
     <select name="genre" id="genre">
-        <option value="">All Genres</option>
+        <option value="" {{ old('genre') == "" ? 'selected' : '' }}>All Genres</option>
         @foreach ($genres as $genre)
-            <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+            <option value="{{ $genre->id }}" {{ old('genre') == $genre->id ? 'selected' : '' }}>{{ $genre->name }}</option>
         @endforeach
     </select>
     <button type="submit">Filter</button>
 </form>
+<table class="table__song-overview">
+    <thead>
+        <tr>
+            <th>Song</th>
+            <th>Author</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($songs as $song)
+            <tr>
+                <td><a href="{{ route('song.show', ['id' => $song->id]) }}">{{$song->name}}</a></td>
+                <td>{{ $song->author }}</td>
+                <td>{{ $song->genre->name }}</td>
+                <td><a href="{{ route( 'song.destroy', $song->id )}}">Delete</a></td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 
-<ul>
-@foreach ($songs as $song)
-    <li>
-        <a href="{{ route('song.show', ['id' => $song->id]) }}">{{$song->name}}</a> - {{$song->author}} | {{$song->genre->name}}
-        | <a href="{{'/song/destroy/' .  $song->id}}">Delete</a>
-        </li>
-@endforeach
-</ul>
-<a href="{{route('song.create')}}">Create a song</a>
+<a class="button__song-create" href="{{route('song.create')}}">Create a song</a>
 @endsection

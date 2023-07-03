@@ -29,6 +29,7 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
+        // Validating the input of the user before storing it.
         $request ->validate([
             'name' => 'required',
         ]);

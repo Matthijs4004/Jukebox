@@ -21,9 +21,9 @@
     </select>
 
     <button type="submit">Add song</button>
-</form>
+</form><br>
 
-
+<a href="{{route('playlist.show', $playlist->id)}}"><- Back</a>
 
 
 @endsection

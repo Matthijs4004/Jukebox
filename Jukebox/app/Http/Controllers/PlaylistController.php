@@ -14,7 +14,8 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $user = Auth::user(); // Retrieve the authenticated user
+        // Selecting logged in user and selecting the connecting playlists from that user
+        $user = Auth::user(); 
         $playlists = $user->playlists;
 
         $songs = Song::all();
@@ -36,13 +37,16 @@ class PlaylistController extends Controller
     {
         $user = Auth::user();
 
+        // Validating input from form
         $validatedData = $request->validate([
             'name' => 'required',
         ]);
 
+        // Storing the playlist with validated name and adding the user id to the playlist.
         $playlist = new Playlist($validatedData);
         $playlist->user_id = $user->id;
         $playlist->save();
+        
         return redirect(route('playlist.index'));
     }
 
@@ -72,14 +76,13 @@ class PlaylistController extends Controller
      */
     public function update(Request $request, Playlist $playlist)
     {
+        // Updating the name of the playlist and storing it
         $id = $playlist->id;
         $playlist = Playlist::findOrFail($id);
         $playlist->name = $request->input('name');
-        // Perform other updates as needed
         $playlist->save();
 
-        return redirect()->route('playlist.edit', $playlist->id)
-            ->with('success', 'Playlist updated successfully.');
+        return redirect()->route('playlist.edit', $playlist->id);
     }
 
     /**
@@ -87,16 +90,18 @@ class PlaylistController extends Controller
      */
     public function destroy(Playlist $playlist)
     {
+        // Search for playlist and detaching all songs in the relationship table and then delete the playlist.
         $playlistId = $playlist->id;
         $playlist = Playlist::findOrFail($playlistId);
-        $playlist->songs()->detach(); // Remove all associated songs from the relationship table
-        $playlist->delete(); // Delete the playlist
+        $playlist->songs()->detach();
+        $playlist->delete();
 
         return redirect(route('playlist.index'));
     }
 
-    public function addSongs(Request $request, $id) {
-        //dd($id);
+    public function addSongs(Request $request, $id) 
+    {
+        // Attaching the song to the playlist.
         $playlist = Playlist::find($id);
         $song = $request->input('song');
         $playlist->songs()->attach($song);
@@ -104,7 +109,9 @@ class PlaylistController extends Controller
         return redirect(route('playlist.edit', ['playlist' => $playlist]));
     }
 
-    public function removeSong($playlistId, $songId) {
+    public function removeSong($playlistId, $songId) 
+    {
+        // Detaching the song from the playlist.
         $playlist = Playlist::findOrFail($playlistId);
         $playlist->songs()->detach($songId);
 

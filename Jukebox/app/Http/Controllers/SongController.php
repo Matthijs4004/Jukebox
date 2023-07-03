@@ -15,19 +15,17 @@ class SongController extends Controller
      */
     public function index(Request $request)
     {
-        //dd(Auth::user());
+        // Selecting all the songs and genres, also selecting songs based on a genre for filter.
         $genres = Genre::all();
         $songs = Song::all();
-
         $query = Song::with('genre');
 
+        // Check if a filter has been selected and then only views the songs with the filtered genre
         if ($request->has('genre') && $request->genre != '') {
             $genreId = $request->genre;
             $query->where('genre_id', $genreId);
         }
-    
         $songs = $query->get();
-
 
         return view('song.index', ['songs' => $songs, 'genres' => $genres]);
     }
@@ -46,6 +44,7 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
+        // Validating user input before storing it
         $request ->validate([
             'name' => 'required',
             'author' => 'required',

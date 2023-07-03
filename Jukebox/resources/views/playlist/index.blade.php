@@ -6,6 +6,7 @@
 <h1>Totaaloverzicht Playlists</h1>
 <ul>
 @foreach ($playlists as $playlist)
+
     <li>{{$playlist->name}} |
         <a href="{{ route('playlist.show', $playlist->id) }}">Manage</a>
         |
@@ -18,7 +19,9 @@
             @endforeach
         </ul>
     @else
-        <p>No songs found for this playlist.</p>
+        <ul>
+            <li style="color: red">No songs found for this playlist.</li>
+        </ul>
     @endif
 @endforeach
 </ul> 
