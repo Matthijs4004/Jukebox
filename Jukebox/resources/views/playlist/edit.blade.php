@@ -11,12 +11,8 @@
 </form>
 
 <h2>Add a song to your playlist</h2>
-<form action="{{ route('playlist.addSongs') }}" method="POST">
+<form action="{{ route('playlist.addSongs', $playlist->id) }}" method="POST">
     @csrf
-    <select style="display: none" name="playlist" id="playlist">
-            <option value="{{ $playlist->id }}" selected></option>
-    </select>
-
     <label for="song">Select Songs:</label>
     <select name="song" id="song">
         @foreach($songs as $song)

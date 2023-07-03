@@ -51,7 +51,7 @@ Route::get('/playlist/{playlist}', [PlaylistController::class, 'show'])->name('p
 Route::get('/playlist/{playlist}/edit', [PlaylistController::class, 'edit'])->name('playlist.edit');
 Route::post('/playlist/{playlist}/update', [PlaylistController::class, 'update'])->name('playlist.update');
 
-Route::post('/playlist/addSongs', [PlaylistController::class, 'addSongs'])->name('playlist.addSongs');
+Route::post('/playlist/addSongs/{playlist}', [PlaylistController::class, 'addSongs'])->name('playlist.addSongs');
 Route::get('/playlist/{playlist}/song/{song}/remove', [PlaylistController::class, 'removeSong'])->name('playlist.removeSong');
 
 require __DIR__.'/auth.php';

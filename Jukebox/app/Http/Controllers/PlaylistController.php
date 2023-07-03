@@ -95,8 +95,9 @@ class PlaylistController extends Controller
         return redirect(route('playlist.index'));
     }
 
-    public function addSongs(Request $request) {
-        $playlist = Playlist::find($request->input('playlist'));
+    public function addSongs(Request $request, $id) {
+        //dd($id);
+        $playlist = Playlist::find($id);
         $song = $request->input('song');
         $playlist->songs()->attach($song);
 
