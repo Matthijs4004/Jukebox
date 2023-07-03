@@ -69,7 +69,6 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        Genre::destroy($genre->id);
-        return redirect(route('genre.index'));
+        //
     }
 }
