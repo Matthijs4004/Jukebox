@@ -7,7 +7,6 @@
 <ul>
 @foreach ($playlists as $playlist)
     <li>{{$playlist->name}} |
-        <?php //dd($playlist->id); ?>
         <a href="{{ route('playlist.show', $playlist->id) }}">Manage</a>
         |
         <a href="{{ route('playlist.destroy', $playlist->id) }}">Delete</a>

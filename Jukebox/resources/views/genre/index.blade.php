@@ -9,4 +9,5 @@
     <li>{{$genre->name}} <a href="{{'/genre/destroy/' .  $genre->id}}">X</a></li>
 @endforeach
 </ul> 
+<a href="{{route('genre.create')}}">Create a genre</a>
 @endsection

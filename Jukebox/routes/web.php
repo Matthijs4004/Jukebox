@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::get('/getallusernames', [ProfileController::class, 'getAllUsernames']);
 
 Route::get('/genre/all', [GenreController::class, 'index'])->name('genre.index');
 Route::get('/genre/create', [GenreController::class, 'create'])->name('genre.create');

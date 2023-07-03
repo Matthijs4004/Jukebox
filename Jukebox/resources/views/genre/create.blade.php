@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@push('title') Playlist - Create @endpush
+@push('title') Genre - Create @endpush
 
 @section('content')
 <form method="POST" action="{{route('genre.store')}}">
@@ -13,4 +13,5 @@
     <br>
     <input type="submit" value="submit">
 </form>
+<br>
 @endsection

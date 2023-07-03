@@ -3,12 +3,10 @@
 @push('title') Playlist - Edit @endpush
 
 @section('content')
-<!-- playlists/edit.blade.php -->
 <form action="{{ route('playlist.update', $playlist->id) }}" method="POST">
     @csrf
     <label for="name">Playlist Name:</label>
     <input type="text" id="name" name="name" value="{{ $playlist->name }}">
-    <!-- Include other fields as needed -->
     <button type="submit">Update Playlist</button>
 </form>
 

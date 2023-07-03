@@ -3,7 +3,6 @@
 @push('title') Playlist - Details @endpush
 
 @section('content')
-<!-- playlists/show.blade.php -->
 <h2>{{ $playlist->name }}</h2>
 @if ($playlist->songs->count() == 0)
     <p style="color: red;">Playlist is empty</p>
